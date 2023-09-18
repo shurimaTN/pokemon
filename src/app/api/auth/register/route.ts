@@ -10,6 +10,9 @@ export async function POST(request:NextRequest):Promise<NextResponse> {
     }
     const data = await request.json()
     const {username, password, passwordConfirm} = data
+    console.log('====================================');
+    console.log(username, password, passwordConfirm);
+    console.log('====================================');
     if (password !== passwordConfirm) {
         return NextResponse.json({"message": `Passwords must match. Please try again..`}, {status: 400})
     }
