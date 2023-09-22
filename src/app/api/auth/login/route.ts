@@ -11,17 +11,20 @@ export async function POST(request:NextRequest) {
     }
     const data = await request.json()
     const {username, password} = data
-
+    console.log('====================================');
+    console.log(data);
+    console.log('====================================');
     const isValidData = (username && password)
     if (!isValidData) {
         return NextResponse.json({"message": `Username and password are required.`}, {status: 400})
     }
     const dbResponse = await getUserByUsername(username)
-    if (!dbResponse || dbResponse) {
+    console.log(dbResponse)
+    if (!dbResponse || dbResponse.length<1 ) {
         return NextResponse.json({"message": `Invalid creds.`}, {status: 400})
     }
     const userRecord:Users = dbResponse[0]
-    if (!userRecord || userRecord) {
+    if (!userRecord) {
         return NextResponse.json({"message": `Invalid creds.`}, {status: 400})
     }
     const userRecordId = userRecord['id']
@@ -33,8 +36,11 @@ export async function POST(request:NextRequest) {
     if (!isValidPasswordRequest) {
         return NextResponse.json({"message": `Invalid creds, please try again.`}, {status: 400})
     }
+    console.log('====================================');
+    console.log("here");
+    console.log('====================================');
     await setSessionUser(userRecordId)
-    return NextResponse.json({}, {status: 200})
+    return NextResponse.json({t:"d"}, {status: 200})
 }
 export const config = {
     runtime: 'edge',

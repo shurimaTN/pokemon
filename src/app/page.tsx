@@ -6,9 +6,9 @@ import { getAllPokemons } from '@/lib/pokemon';
 import { SWRProvider } from '@/lib/pokemonProvider';
 import { getSessionUser } from '@/lib/session'
 
-export default async  function Home({fallback}:any) {
-  const user = await getSessionUser()
-  const pokemons = await getAllPokemons()
+export default async  function Home() {
+  const user = await getSessionUser();
+  const pokemons = await getAllPokemons();
   return (
     <SWRProvider value={{pokemons}}>
       <PokeNavbar user={user}/>

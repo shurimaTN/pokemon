@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(request:NextRequest):Promise<NextResponse> {
     await endSessionForUser()
-    return NextResponse.json({}, {status: 200})
+    return NextResponse.json({t:"t"}, {status: 200})
 }
 export const config = {
     runtime: 'edge',

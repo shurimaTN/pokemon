@@ -20,7 +20,7 @@
     "flowbite-react": "^0.6.0",
     "jose": "^4.14.5",
     "kysely": "^0.26.3",
-    "next": "13.4.19",
+    "next": "13.4.8",
     "postcss": "8.4.29",
     "react": "18.2.0",
     "react-dom": "18.2.0",

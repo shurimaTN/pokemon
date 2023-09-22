@@ -28,6 +28,7 @@ export async function registerUser(newUserData:Pick<Users,"email"| "username" | 
         }]}
         responseStatus = 201
     } catch ({message}:any) {
+        console.log(message)
         if (`${message}`.includes("duplicate key value violates unique constraint")) {
             response = {message: `${username} is taken.`}
         }
