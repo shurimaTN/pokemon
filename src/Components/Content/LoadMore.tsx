@@ -6,7 +6,7 @@ import { getAllPokemons } from "@/lib/pokemon";
 import PokemonThumbnail from '@/Components/Card/Card';
 export function LoadMore() {
   const [pokemons, setPokemons] = useState<any[]>([]);
-  const [page, setPage] = useState<string>("https://pokeapi.co/api/v2/pokemon?offset=20&limit=20");
+  const [page, setPage] = useState<string>("https://pokeapi.co/api/v2/pokemon?offset=60&limit=20");
 
   const { ref, inView } = useInView();
 
@@ -25,7 +25,7 @@ export function LoadMore() {
   }, [inView]);
 
   return (
-    <><div className="flex min-h-screen flex-col items-center justify-between px-24">
+    <><div className="flex min-h[5vh] flex-col items-center justify-between px-24">
         <div className="all-container">
       {pokemons.map((pokemon:any, index:any) => (
             <PokemonThumbnail

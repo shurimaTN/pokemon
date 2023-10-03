@@ -1,4 +1,4 @@
-export const getAllPokemons = async (page="https://pokeapi.co/api/v2/pokemon?limit=20") => {
+export const getAllPokemons = async (page="https://pokeapi.co/api/v2/pokemon?limit=60") => {
     const res = await fetch(page);
     if (!res.ok) {
       // This will activate the closest `error.js` Error Boundary
