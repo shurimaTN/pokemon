@@ -1,5 +1,6 @@
 import React from "react";
 import Description from "./Description";
+import Image from "next/image";
 import Link from 'next/link'
 const PokemonThumbnail = ({
 id,
@@ -27,7 +28,7 @@ return (
 	<div className="number">
 		<small>#0{id}</small>
 	</div>
-	<img src={image} alt={name} />
+	<Image src={image} alt={name}  width={100} height={100}/>
 	<div className="detail-wrapper">
 		<h3>{name.toUpperCase()}</h3>
 		<small>Type : {type}</small>

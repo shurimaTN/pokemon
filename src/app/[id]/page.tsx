@@ -1,13 +1,19 @@
 import PokemonThumbnail from '@/Components/Card/Card';
 import { getPokemon } from '@/lib/pokemon'
 import React from 'react'
-
-type Props = {}
+import PokeNavbar from '@/Components/NavBar/Navbar';
+import { getSessionUser } from '@/lib/session'
+import { getCommentsForPokemon } from '@/lib/queries/comment';
+import Comment from './comment';
 
 export default async  function page({params}: any) {
     const pokemon = await getPokemon(params.id)
+    const user = await getSessionUser();
+    const comments = await getCommentsForPokemon(params.id)
   return (
     <div className='flex  flex-col'>
+      <PokeNavbar user={user}/>
+      <div className='flex flex-row pl-40 pt-40'>
         <PokemonThumbnail
             id={pokemon.id}
             name={pokemon.name}
@@ -29,6 +35,20 @@ export default async  function page({params}: any) {
             bs5={pokemon.stats[4].base_stat}
             bs6={pokemon.stats[5].base_stat}
         />
+        <div className='h-auto w-[40vw]  ml-10 mt-10 flex flex-col p-4'>
+          {
+            comments.map((comment,idx)=>(<div key={"comm"+idx} className={`relative ${['rock', 'ghost', 'electric', 'bug', 'poison', 'normal', 'fairy', 'fire', 'grass', 'water','ground' ][Math.floor(Math.random()*10)]} bg-blue-500 text-white p-4 rounded-lg shadow-md mb-2`}>
+            <div className="absolute top-0 -mt-2 w-0 h-0 border-t-2 border-blue-500 border-solid border-l-4 border-transparent"></div>
+            <p>
+              <span className="font-bold">{comment.username}</span> commented: {" "} 
+              {comment.content}
+            </p>
+          </div>
+          ))
+          }
+          <Comment user={user} pokemon={params.id}/>
+        </div>
+        </div>
     </div>
   )
 }

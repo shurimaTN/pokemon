@@ -7,8 +7,8 @@ const issuer = 'urn:jrefio:issuer'
 const audience = 'urn:jrefio:audience'
 const expiresAt = '2h'
 
-export const encodeUserSession = async (userId:string) => {
-    const jwt = await new jose.EncryptJWT({ 'user': userId })
+export const encodeUserSession = async (userId:string, username:string) => {
+    const jwt = await new jose.EncryptJWT({ 'user': userId, username })
         .setProtectedHeader({ alg: 'dir', enc: 'A128CBC-HS256' })
         .setIssuedAt()
         .setIssuer(issuer)
@@ -26,7 +26,7 @@ export const decodeUserSession = async (jwt:string) => {
             audience: audience,
         })
         const {user} = payload
-        return user
+        return payload
     } catch (error) {
         
     }
@@ -35,8 +35,8 @@ export const decodeUserSession = async (jwt:string) => {
 } 
 
 
-export const setSessionUser = async (userId:string) => {
-    const newSessionValue = await encodeUserSession(userId)
+export const setSessionUser = async (userId:string, username:string) => {
+    const newSessionValue = await encodeUserSession(userId, username)
     cookies().set("session_id", newSessionValue)
 }
 

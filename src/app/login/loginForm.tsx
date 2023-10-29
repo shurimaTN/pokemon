@@ -7,11 +7,11 @@ import { Button, Label, TextInput } from 'flowbite-react';
 
 
 
-export default function LoginForm ({didSubmit}) {
+export default function LoginForm ({didSubmit}:any) {
     const [results, setResults] = useState(null)
     const [message, setMessage] = useState(null)
 
-    const handleForm = async (event) => {
+    const handleForm = async (event:any) => {
         event.preventDefault()
         const formData = new FormData(event.target)
         const data = Object.fromEntries(formData)

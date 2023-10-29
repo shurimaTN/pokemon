@@ -10,9 +10,6 @@ export async function POST(request:NextRequest):Promise<NextResponse> {
     }
     const data = await request.json()
     const {username, password, passwordConfirm} = data
-    console.log('====================================');
-    console.log(username, password, passwordConfirm);
-    console.log('====================================');
     if (password !== passwordConfirm) {
         return NextResponse.json({"message": `Passwords must match. Please try again..`}, {status: 400})
     }
@@ -31,7 +28,9 @@ export async function POST(request:NextRequest):Promise<NextResponse> {
     const responseStatus = dbResponse && dbResponse.status ? dbResponse.status : 500
     return NextResponse.json(responseData, {status: responseStatus})
 }
-export const config = {
+/* export const config = {
     runtime: 'edge',
     regions: ['fra1'],
-  };
+  }; */
+export const runtime = 'edge';
+//export const regions =  [ 'fra1']

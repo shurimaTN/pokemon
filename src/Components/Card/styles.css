@@ -170,11 +170,6 @@ margin-top: 1rem;
 font-family: "Satisfy", cursive;
 }
 
-button:hover {
-background-color: #ff0000;
-background-image: linear-gradient(
-	315deg, #ff0000 0%, #ffed00 74%);
-}
 
 .pokeinfo {
 margin: 0 25px;

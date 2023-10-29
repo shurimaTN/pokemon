@@ -1,7 +1,6 @@
 export const getAllPokemons = async (page="https://pokeapi.co/api/v2/pokemon?limit=60") => {
     const res = await fetch(page);
     if (!res.ok) {
-      // This will activate the closest `error.js` Error Boundary
       throw new Error('Failed to fetch data')
     }
     const data = await res.json().catch(e=>({}));
@@ -11,7 +10,6 @@ export const getAllPokemons = async (page="https://pokeapi.co/api/v2/pokemon?lim
           `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`
         );
         if (!res.ok) {
-          // This will activate the closest `error.js` Error Boundary
           throw new Error('Failed to fetch data')
         }
         const data1 = await res.json().catch(e=>({}));

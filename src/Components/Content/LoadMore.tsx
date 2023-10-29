@@ -11,18 +11,19 @@ export function LoadMore() {
   const { ref, inView } = useInView();
 
 
-  const loadMoreBeers = async () => {
-   if(!page) return;
-    const newPokemons = (await getAllPokemons(page)) ?? [];
-    setPokemons((prevPokemons: any[]) => [...prevPokemons, ...newPokemons.results]);
-    setPage(newPokemons.next);
-  };
+  
 
   useEffect(() => {
+    const loadMorePokemons = async () => {
+      if(!page) return;
+       const newPokemons = (await getAllPokemons(page)) ?? [];
+       setPokemons((prevPokemons: any[]) => [...prevPokemons, ...newPokemons.results]);
+       setPage(newPokemons.next);
+     };
     (()=>{if (inView) {
-      loadMoreBeers();
+      loadMorePokemons();
     }})()
-  }, [inView]);
+  }, [inView, page]);
 
   return (
     <><div className="flex min-h[5vh] flex-col items-center justify-between px-24">

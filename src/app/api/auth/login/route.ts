@@ -11,19 +11,15 @@ export async function POST(request:NextRequest) {
     }
     const data = await request.json()
     const {username, password} = data
-    console.log('====================================');
-    console.log(data);
-    console.log('====================================');
     const isValidData = (username && password)
     if (!isValidData) {
         return NextResponse.json({"message": `Username and password are required.`}, {status: 400})
     }
     const dbResponse = await getUserByUsername(username)
-    console.log(dbResponse)
     if (!dbResponse || dbResponse.length<1 ) {
         return NextResponse.json({"message": `Invalid creds.`}, {status: 400})
     }
-    const userRecord:Users = dbResponse[0]
+    const userRecord:Pick<Users, "username" | "id" | "password">= dbResponse[0]
     if (!userRecord) {
         return NextResponse.json({"message": `Invalid creds.`}, {status: 400})
     }
@@ -36,13 +32,12 @@ export async function POST(request:NextRequest) {
     if (!isValidPasswordRequest) {
         return NextResponse.json({"message": `Invalid creds, please try again.`}, {status: 400})
     }
-    console.log('====================================');
-    console.log("here");
-    console.log('====================================');
-    await setSessionUser(userRecordId)
+    await setSessionUser(userRecordId as string, userRecord.username )
     return NextResponse.json({t:"d"}, {status: 200})
 }
-export const config = {
+/* export const config = {
     runtime: 'edge',
     regions: ['fra1'],
-  };
+  }; */
+export const runtime = 'edge';
+//export const regions =  [ 'fra1']

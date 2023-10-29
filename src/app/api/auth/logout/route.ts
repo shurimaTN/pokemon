@@ -1,12 +1,14 @@
 import { endSessionForUser } from '@/lib/session'
 import { NextRequest, NextResponse } from 'next/server'
+import { redirect } from 'next/navigation'
 
-
-export async function POST(request:NextRequest):Promise<NextResponse> {
+export async function GET(request:NextRequest):Promise<NextResponse> {
     await endSessionForUser()
-    return NextResponse.json({t:"t"}, {status: 200})
+    redirect('/')
 }
-export const config = {
+/* export const config = {
     runtime: 'edge',
     regions: ['fra1'],
-  };
+  }; */
+export const runtime = 'edge';
+//export const regions =  [ 'fra1']
